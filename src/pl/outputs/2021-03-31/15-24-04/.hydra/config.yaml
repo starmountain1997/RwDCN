@@ -1,0 +1,14 @@
+exp_name: ${model.name}_${model.dataset_type}
+run_name: ${model.dataset_name}_${phase}
+home_dir: /home/usrs/gzr1997
+log:
+  log_dir: ${home_dir}/RESULTS/${exp_name}/${run_name}
+  tb_save_dir: ${log.log_dir}/tb
+  net_save_dir: ${log.log_dir}/net
+  img_save_dir: ${log.log_dir}/img
+model:
+  name: Dummy
+  ckpt: null
+  dataset_type: SISR
+  dataset_name: reds
+phase: test

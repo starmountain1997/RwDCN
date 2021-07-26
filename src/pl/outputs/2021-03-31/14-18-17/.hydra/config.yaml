@@ -1,0 +1,18 @@
+exp_name: ${model.name}_${model.dataset_type}
+run_name: ${model.dataset_name}_${phase}
+home_dir: /home/usrs/gzr1997
+log:
+  log_dir: ${home_dir}/RESULTS/${exp_name}/${run_name}
+  tb_save_dir: ${log.log_dir}/tb
+  net_save_dir: ${log.log_dir}/net
+  img_save_dir: ${log.log_dir}/img
+model:
+  name: RwDCNMixedUp
+  ckpt: /home/usrs/gzr1997/RESULTS/RwDCNMixedUp_Ref10/None_train/net/epoch=40-val_ssim=0.8185.ckpt
+  dataset_type: Ref10
+  dataset_name: reds
+  lr_size:
+  - 176
+  - 320
+  batch_size: 4
+phase: test

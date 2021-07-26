@@ -1,0 +1,9 @@
+# @package _group_
+name: Dummy
+ckpt: ~
+
+dataset_type: SISR
+dataset_name: ~
+lr_size:
+  - 176
+  - 320

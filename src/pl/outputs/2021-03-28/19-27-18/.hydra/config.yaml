@@ -1,0 +1,23 @@
+exp_name: ${model.name}_${model.dataset_type}
+run_name: ${model.dataset_name}_${phase}
+home_dir: /home/usrs/gzr1997
+experiment:
+  gpus:
+  - 0
+  - 1
+  accumulate_grad_batches: 2
+log:
+  log_dir: ${home_dir}/RESULTS/${exp_name}/${run_name}
+  tb_save_dir: ${log.log_dir}/tb
+  net_save_dir: ${log.log_dir}/net
+  img_save_dir: ${log.log_dir}/img
+model:
+  name: RwDCNAttention
+  ckpt: null
+  dataset_type: Ref10
+  dataset_name: null
+  lr_size:
+  - 48
+  - 48
+  batch_size: 4
+phase: train

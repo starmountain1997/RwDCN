@@ -1,0 +1,12 @@
+# @package _group_
+name: RCAN
+ckpt: /home/usrs/gzr1997/RES/RCAN_ImageSRREDS_x4_train/net/epoch=37-val_loss=0.03.ckpt
+
+dataset_type: SISR
+dataset_name: ~
+lr_size:
+  - 176
+  - 320
+batch_size: 16
+#  - 176
+#  - 320

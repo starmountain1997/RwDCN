@@ -1,0 +1,10 @@
+# @package _group_
+name: RwDCNAttention
+#ckpt: /home/usrs/gzr1997/RESULTS/RwDCNAttention_Ref10/None_train/net/epoch=29-val_ssim=0.8156.ckpt
+ckpt: ~
+dataset_type: Ref10
+dataset_name: ~
+lr_size:
+  - 64
+  - 64
+batch_size: 2
