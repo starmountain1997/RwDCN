@@ -3,6 +3,8 @@ from collections import OrderedDict
 
 
 def get_img_dict(root_dir: str) -> OrderedDict:
+	# this function return a dict {img_key, img_save_path}
+	# use the key, we can locate image on disk.
     clip_walker = os.walk(root_dir)
     img_dict = OrderedDict()
     for _, clip_nos, _ in clip_walker:

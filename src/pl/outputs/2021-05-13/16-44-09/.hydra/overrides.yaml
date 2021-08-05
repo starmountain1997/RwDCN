@@ -1,3 +1,0 @@
-- +phase=test
-- +model.dataset_name=cufed5
-- +model=rcan

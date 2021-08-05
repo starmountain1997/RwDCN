@@ -1,3 +1,0 @@
-- +phase=test
-- +model.dataset_name=vid4
-- +model=rwdcnmixedup

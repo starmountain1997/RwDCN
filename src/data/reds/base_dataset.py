@@ -6,9 +6,12 @@ from torchvision.transforms.functional import crop
 
 from src.data.reds.backend import REDSBackend
 
+# we. use REDS for training and validation.
+# here defines where the training and validation data is saved.
+
 reds_train = {
-    "dataroot_lr": "/home/usrs/gzr1997/DS/REDS_DATA/train/sharp_bicubic",
-    "dataroot_hr": "/home/usrs/gzr1997/DS/REDS_DATA/train/sharp",
+    "dataroot_lr": "/home/usrs/gzr1997/DS/REDS_DATA/train/sharp_bicubic", # low resolution path.
+    "dataroot_hr": "/home/usrs/gzr1997/DS/REDS_DATA/train/sharp", # high resolution path.
 }
 
 reds_val = {
@@ -20,8 +23,8 @@ reds_val = {
 class REDSDataset(Dataset):
     def __init__(self, mode, lr_size: List, scale_factor=4):
         super(REDSDataset, self).__init__()
-        self.mode = mode
-        self.crop_indices = []
+        self.mode = mode # what mode they us, train or test?
+        self.crop_indices = [] # use it in random crop.
         self.scale_factor = scale_factor
         self.lr_size = lr_size
         self.hr_size = [x * self.scale_factor for x in self.lr_size]

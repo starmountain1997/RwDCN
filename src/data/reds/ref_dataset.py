@@ -6,6 +6,7 @@ def _get_ref_key(frame_no):
 
 
 class Ref10Dataset(REDSDataset):
+	# 10 frames shares one reference images.
     def __init__(self, **kwargs):
         super(Ref10Dataset, self).__init__(**kwargs)
         self.set_key()
@@ -13,7 +14,7 @@ class Ref10Dataset(REDSDataset):
     def __getitem__(self, idx: int):
         key = self.backend.key[idx]
         clip_no, frame_no = key.split('_')
-        ref_key = f'{clip_no}_{_get_ref_key(frame_no)}'
+        ref_key = f'{clip_no}_{_get_ref_key(frame_no)}' # reference image's key.
         lr_img = self.backend.lr_get(key)
         gt_img = self.backend.hr_get(key)
         ref_img = self.backend.hr_get(ref_key)
@@ -27,8 +28,10 @@ class Ref10Dataset(REDSDataset):
         }
 
     def set_key(self):
+		# we need to remove reference frames' key from key. list.
         def _is_valid_lr_key(lr_idx):
             if lr_idx % 10 == 4:
+				# if the key is 4, 14, ..., 94, we remove it.
                 return False
             else:
                 return True

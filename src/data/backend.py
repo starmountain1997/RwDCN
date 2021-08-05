@@ -5,11 +5,15 @@ from src.data.utils import get_img_dict
 
 
 class Backend(object):
+	# each dataset object (REDSDataset, Vid4Dataset, CUFED5ataset) has a backend. 
     def __init__(self, dataroot_lr: str, dataroot_hr: str, scale_factor: int = 4):
         self.to_tensor = transforms.ToTensor()
+		# get_img_dict return a dict key is the images' name, value is the image save dir.
         self.hr_env = get_img_dict(dataroot_hr)
         self.lr_env = get_img_dict(dataroot_lr)
         self.scale_factor = scale_factor
+		# both lr_env and hr_env has keys, and they have the same initial value.
+		# but as reference based method need to remove reference frame's index from hr_env.
         self.key = [v for v in self.lr_env.keys()]
         self.lr_size = []
 

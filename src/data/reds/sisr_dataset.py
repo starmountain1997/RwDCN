@@ -5,6 +5,7 @@ from src.data.reds.base_dataset import REDSDataset
 
 
 class SISRDataset(REDSDataset):
+	# single image super resolution dataset.
     def __init__(self, **kwargs):
         super(SISRDataset, self).__init__(**kwargs)
 

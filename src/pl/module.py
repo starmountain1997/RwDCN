@@ -13,6 +13,8 @@ from src.losses.texture_loss import TextureLoss
 
 
 class SRModule(pl.LightningModule):
+	# this is the core class in whole RwDCN.
+	# you can ref: https://pytorch-lightning.readthedocs.io/en/latest/common/lightning_module.html
     def __init__(self,
                  lr=1e-4,
                  betas=[0.9, 0.999],
@@ -24,7 +26,7 @@ class SRModule(pl.LightningModule):
                  T_max=32,
                  l_carbonnier=1., l_percep=1e-4, l_style=1e-4, l_adv=1e-6, l_texture=1e-4):
         super(SRModule, self).__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters()# pytorch lighning function. ref: https://github.com/PyTorchLightning/pytorch-lightning/issues/3981
 
     @abstractmethod
     def forward(self, batch):
@@ -32,6 +34,9 @@ class SRModule(pl.LightningModule):
 
     @patch.object(PerceptualVGG, 'init_weights')
     def configure_loss(self, init_weights=1.):
+		# this part you need ref to mmediting's doc.
+		# https://mmediting.readthedocs.io/en/latest/_modules/mmedit/models/losses/perceptual_loss.html?highlight=Loss
+		# (actually i am not very familiar with python's decorator)
         self.percep = PerceptualLoss(layer_weights={'4': 1., '9': 1., '18': 1.})
         self.carbonnier = CharbonnierLoss()
         self.gan = GANLoss('wgan', loss_weight=0.0001)
@@ -76,7 +81,7 @@ class SRModule(pl.LightningModule):
         self.log('val_psnr', val_psnr)
         self.log('val_ssim', val_ssim)
         if_save = random.randint(0, 100)
-        if if_save == 42:
+        if if_save == 42: # we cannot save every output images, otherwise our disk will be full of output images. Because the ultimate answer to everything is 42, we store the picture when this random number is equal to 42.
             sr = sr * 255.
             sr = sr.data.cpu().numpy().astype(np.uint8)
             return {'sr': sr,
